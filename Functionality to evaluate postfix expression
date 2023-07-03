@@ -1,0 +1,59 @@
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        else:
+            return "Stack is empty"
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def top(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        else:
+            return "Stack is empty"
+
+
+def evaluate_postfix(expression):
+    stack = Stack()
+
+    for char in expression:
+        if char.isdigit():
+            stack.push(int(char))
+        else:
+            operand2 = stack.pop()
+            operand1 = stack.pop()
+            result = perform_operation(operand1, operand2, char)
+            if result is None:
+                return "Error: Division by zero"
+            stack.push(result)
+
+    return stack.pop()
+
+
+def perform_operation(operand1, operand2, operator):
+    if operator == '+':
+        return operand1 + operand2
+    elif operator == '-':
+        return operand1 - operand2
+    elif operator == '*':
+        return operand1 * operand2
+    elif operator == '/':
+        if operand2 == 0:
+            return None  # Division by zero error
+        return operand1 / operand2
+    elif operator == '^':
+        return operand1 ** operand2
+
+
+# Main program
+expression = input()
+result = evaluate_postfix(expression)
+print("%.f"%result)

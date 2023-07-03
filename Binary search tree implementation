@@ -1,0 +1,52 @@
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, value):
+        if self.root is None:
+            self.root = Node(value)
+        else:
+            self._insert_recursive(self.root, value)
+
+    def _insert_recursive(self, root, value):
+        if value < root.data:
+            if root.left is None:
+                root.left = Node(value)
+            else:
+                self._insert_recursive(root.left, value)
+        else:
+            if root.right is None:
+                root.right = Node(value)
+            else:
+                self._insert_recursive(root.right, value)
+
+    def in_order_traversal(self):
+        self._in_order_recursive(self.root)
+
+    def _in_order_recursive(self, root):
+        if root:
+            self._in_order_recursive(root.left)
+            print(root.data, end=" ")
+            self._in_order_recursive(root.right)
+
+# Main program
+if __name__ == '__main__':
+    bst = BinarySearchTree()
+
+    #print("Enter integers to insert into the BST (enter a negative value to stop):")
+
+    # Reading input until a negative value is entered
+    while True:
+        value = int(input())
+        if value < 0:
+            break
+        bst.insert(value)
+
+    print("Tree values in sorted order:")
+    bst.in_order_traversal()

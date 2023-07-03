@@ -1,0 +1,53 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
+
+    def find_max(self):
+        if self.head is None:
+            return None
+
+        max_mark = self.head.data
+        current = self.head.next
+        while current is not None:
+            if current.data > max_mark:
+                max_mark = current.data
+            current = current.next
+
+        return max_mark
+
+# Create the linked list based on user input
+linked_list = LinkedList()
+
+while True:
+    
+    mark = int(input())
+    if mark == -1:
+        break
+    linked_list.insert(mark)
+
+# Print the list of marks
+print("Enter the student mark:")
+current = linked_list.head
+while current is not None:
+    print(current.data, end=" ")
+    current = current.next
+print()
+
+# Find the maximum mark
+max_mark = linked_list.find_max()
+print("The maximum mark is", max_mark, ".")

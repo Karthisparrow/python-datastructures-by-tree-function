@@ -1,0 +1,33 @@
+class stack:
+    def __init__(self):
+        self.stack=[]
+    def push(self,item):
+        self.stack.append(item)
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        else:
+            print("Stack is empty")
+    def is_empty(self):
+        return len(self.stack)==0
+    def top(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        else:
+            print("Stack is empty")
+#main program
+stack=stack()
+stack2=[]
+n=int(input())
+for i in range(n):
+    item=int(input())
+    stack.push(item)
+#print("stack element")
+#stack2=stack.stack.reverse()
+for item in stack.stack:
+    print(item)
+print()
+print("Top Element is:",stack.top())
+stack.pop()
+for item in stack.stack:
+    print(item,end=" ")

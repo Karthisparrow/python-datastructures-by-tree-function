@@ -1,0 +1,42 @@
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def build_tree():
+    root = None
+    values = []
+
+    while True:
+        value = int(input())
+        if value == -1:
+            break
+        values.append(value)
+
+    for value in values:
+        root = insert(root, value)
+
+    return root
+
+def insert(root, value):
+    if root is None:
+        return TreeNode(value)
+    elif value < root.value:
+        root.left = insert(root.left, value)
+    else:
+        root.right = insert(root.right, value)
+    
+    return root
+
+def in_order_traversal(root):
+    if root is not None:
+        in_order_traversal(root.left)
+        print(root.value, end=" ")
+        in_order_traversal(root.right)
+
+# Build the tree from user input
+root = build_tree()
+
+# Perform in-order traversal
+in_order_traversal(root)
